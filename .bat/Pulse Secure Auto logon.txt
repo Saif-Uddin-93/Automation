@@ -1,27 +1,23 @@
 @echo off
 
-SET USER=%USERNAME%
-SET PULSE=C:\Program Files (x86)\Common Files\Pulse Secure\Integration\pulselauncher.exe
-SET PULSE_SERVER=https://secure.example.domain.com
-SET /A ATTEMPTS=0
+set USER=%USERNAME%
+set PULSE=C:\Program Files (x86)\Common Files\Pulse Secure\Integration\pulselauncher.exe
+set PULSE_SERVER=https://secure.example.domain.com
+set /a ATTEMPTS=0
 
 :ATTEMPT
-if %ATTEMPTS% GTR 0 (
-	GOTO:PASSWORD
-)else(
-	GOTO:VPN
-)
+if %ATTEMPTS% gtr 0 (goto:PASSWORD) else (goto:VPN)
 
 :PASSWORD
-SET /p newpass="Enter Password: "
-echo %newpass%>"C:\temp\pwd.txt"
+set /p newpass="Enter Password: "
+echo %newpass%>"C:\TEMP\pwd.txt"
 
 :VPN
-SET /A ATTEMPTS+=1
+set /a ATTEMPTS+=1
 echo Attempt %ATTEMPTS%
 echo Pulse Secure Login
-SET /p PASS=<C:\temp\pwd.txt
+set /p PASS=<C:\TEMP\pwd.txt
 "%PULSE%" -u %USER% -p %PASS% -url %PULSE_SERVER% -r User
-IF %ERRORLEVEL% NEQ 0 GOTO:ATTEMPT
+if %errorlevel% neq 0 (goto:ATTEMPT)
 
 pause
