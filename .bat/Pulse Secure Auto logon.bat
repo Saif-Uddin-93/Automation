@@ -10,13 +10,13 @@ if %ATTEMPTS% gtr 0 (goto:PASSWORD) else (goto:VPN)
 
 :PASSWORD
 set /p newpass="Enter Password: "
-echo %newpass%>"C:\TEMP\pwd.txt"
+echo %newpass%>"%userprofile%\documents\pwd.txt"
 
 :VPN
 set /a ATTEMPTS+=1
 echo Attempt %ATTEMPTS%
 echo Pulse Secure Login
-set /p PASS=<C:\TEMP\pwd.txt
+set /p PASS=<%userprofile%\documents\pwd.txt
 "%PULSE%" -u %USER% -p %PASS% -url %PULSE_SERVER% -r User
 if %errorlevel% neq 0 (goto:ATTEMPT)
 
