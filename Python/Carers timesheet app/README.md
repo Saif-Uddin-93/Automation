@@ -1,4 +1,4 @@
-#Video File Management tool
+# Video File Management tool
 
 ## Purpose
 This app was created to manage the video file produced by my front door camera. It specifically kept the videos of the scheduled times of when my dad's carers would visit to keep track of: who came, what time they arrived and what time they left.
